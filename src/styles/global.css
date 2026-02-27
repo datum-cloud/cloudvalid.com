@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Alliance No.1';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src:
+    url('/fonts/datum/allianceno1-regular-webfont.woff2') format('woff2'),
+    url('/fonts/datum/allianceno1-regular-webfont.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Alliance No.1';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src:
+    url('/fonts/datum/allianceno1-medium-webfont.woff2') format('woff2'),
+    url('/fonts/datum/allianceno1-medium-webfont.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Alliance No.1';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src:
+    url('/fonts/datum/allianceno1-semibold-webfont.woff2') format('woff2'),
+    url('/fonts/datum/allianceno1-semibold-webfont.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Canela Text';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src:
+    url('/fonts/datum/canelatextlcweb-regular-webfont.woff2') format('woff2'),
+    url('/fonts/datum/canelatextlcweb-regular-webfont.woff') format('woff');
+}
+
+@theme {
+  --font-primary:
+    'Alliance No.1', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-alliance:
+    'Alliance No.1', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-canela: 'Canela Text', ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+}
+
+@utility max-width {
+  @apply mx-auto w-full max-w-7xl px-7;
+}
+
+:root {
+  --midnight-fjord: #0c1d31;
+  --glacier-mist-700: #f6f6f5;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-primary);
+}
