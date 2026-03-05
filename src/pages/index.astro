@@ -1,6 +1,10 @@
 ---
+import { Image } from 'astro:assets';
+
 import "@styles/global.css";
-import ogImage from "../content/images/og/default.png";
+import ogImage from "@/src/content/images/og/default.png";
+import ImageFooter from '@/src/assets/footer.png';
+import ImageDatumLogo from '@/src/assets/datum-logo.svg';
 
 const ogImageUrl = new URL(ogImage.src, Astro.site).toString();
 ---
@@ -31,16 +35,15 @@ const ogImageUrl = new URL(ogImage.src, Astro.site).toString();
 
         <!-- Logo icon -->
         <svg xmlns="http://www.w3.org/2000/svg" width="80" height="47" viewBox="0 0 80 47" fill="none">
-  <g clip-path="url(#clip0_9083_46)">
-    <path fill-rule="evenodd" clip-rule="evenodd" d="M38.9729 6.1162L39.6074 6.7554L40.2426 6.1162C43.9632 2.3723 48.309 0.120439 52.8515 0.117769C55.3637 0.104189 57.8235 0.841599 59.9188 2.23657C62.0163 3.63305 63.654 5.62548 64.6236 7.96069L64.625 7.96402L64.6264 7.96737C67.098 13.9645 64.7984 20.4565 59.6437 25.6469L39.5968 45.8196L19.5605 25.6475C16.7205 22.7895 14.7446 19.6287 13.9113 16.2029C13.1964 13.4184 13.3845 10.4766 14.4486 7.80699L14.4567 7.78648L14.4652 7.76612C15.433 5.44813 17.0641 3.47226 19.1511 2.08992C21.2348 0.709779 23.6789 -0.0164097 26.1732 0.00332134C30.7736 0.00724334 35.1865 2.306 38.9729 6.1162ZM24.7352 37.6236C24.7372 37.6257 24.7392 37.6278 24.7413 37.6299L33.13 46.1239H12.8093C8.82477 46.1239 5.61674 45.0141 3.36277 43.0423C1.10079 41.0634 -0.00109863 38.3804 -0.00109863 35.6999C-0.00109863 33.216 0.944291 30.7208 2.89953 28.7869C4.85419 26.8537 7.65868 25.6317 11.1538 25.345L12.382 25.2443L19.5124 32.2965C19.8133 32.5754 20.2715 33.0438 24.7352 37.6236ZM66.8096 25.2598L68.0347 25.3603C71.5298 25.647 74.3343 26.869 76.289 28.8022C78.2442 30.7361 79.1896 33.2313 79.1896 35.7152C79.1896 38.3956 78.0877 41.0787 75.8257 43.0576C73.5718 45.0294 70.3638 46.1392 66.3793 46.1392H46.0345L54.4233 37.6452L54.4358 37.6325L54.9993 37.0542C58.9071 33.0447 59.3608 32.5792 59.6591 32.3051L66.8096 25.2598Z" fill="#BF9595"/>
-  </g>
-  <defs>
-    <clipPath id="clip0_9083_46">
-      <rect width="79.19" height="46.14" fill="white"/>
-    </clipPath>
-  </defs>
-</svg>
-        
+          <g clip-path="url(#clip0_9083_46)">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M38.9729 6.1162L39.6074 6.7554L40.2426 6.1162C43.9632 2.3723 48.309 0.120439 52.8515 0.117769C55.3637 0.104189 57.8235 0.841599 59.9188 2.23657C62.0163 3.63305 63.654 5.62548 64.6236 7.96069L64.625 7.96402L64.6264 7.96737C67.098 13.9645 64.7984 20.4565 59.6437 25.6469L39.5968 45.8196L19.5605 25.6475C16.7205 22.7895 14.7446 19.6287 13.9113 16.2029C13.1964 13.4184 13.3845 10.4766 14.4486 7.80699L14.4567 7.78648L14.4652 7.76612C15.433 5.44813 17.0641 3.47226 19.1511 2.08992C21.2348 0.709779 23.6789 -0.0164097 26.1732 0.00332134C30.7736 0.00724334 35.1865 2.306 38.9729 6.1162ZM24.7352 37.6236C24.7372 37.6257 24.7392 37.6278 24.7413 37.6299L33.13 46.1239H12.8093C8.82477 46.1239 5.61674 45.0141 3.36277 43.0423C1.10079 41.0634 -0.00109863 38.3804 -0.00109863 35.6999C-0.00109863 33.216 0.944291 30.7208 2.89953 28.7869C4.85419 26.8537 7.65868 25.6317 11.1538 25.345L12.382 25.2443L19.5124 32.2965C19.8133 32.5754 20.2715 33.0438 24.7352 37.6236ZM66.8096 25.2598L68.0347 25.3603C71.5298 25.647 74.3343 26.869 76.289 28.8022C78.2442 30.7361 79.1896 33.2313 79.1896 35.7152C79.1896 38.3956 78.0877 41.0787 75.8257 43.0576C73.5718 45.0294 70.3638 46.1392 66.3793 46.1392H46.0345L54.4233 37.6452L54.4358 37.6325L54.9993 37.0542C58.9071 33.0447 59.3608 32.5792 59.6591 32.3051L66.8096 25.2598Z" fill="#BF9595"/>
+          </g>
+          <defs>
+            <clipPath id="clip0_9083_46">
+              <rect width="79.19" height="46.14" fill="white"/>
+            </clipPath>
+          </defs>
+        </svg>
 
         <h1 class="font-canela text-[#0c1d31] text-[36px] sm:text-[48px] md:text-[60px] leading-tight sm:leading-tight md:leading-17.5 tracking-[-0.5px] sm:tracking-[-1px] md:tracking-[-1.5px] font-normal">CloudValid<br />is now part of Datum</h1>
 
@@ -49,7 +52,7 @@ const ogImageUrl = new URL(ogImage.src, Astro.site).toString();
           <a
             href="https://www.datum.net/blog/open-sourcing-domain-validation/"
             target="_blank"
-            class="inline-flex items-center gap-3 border border-[#0c1d31] rounded-md px-6 h-[52px] text-[#0c1d31] no-underline font-semibold text-base leading-6"
+            class="inline-flex items-center gap-3 border border-[#0c1d31] rounded-md px-6 h-13 text-[#0c1d31] no-underline font-semibold text-base leading-6"
           >
             Read the full announcement
             <svg width="16" height="16" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" aria-hidden="true">
@@ -65,11 +68,12 @@ const ogImageUrl = new URL(ogImage.src, Astro.site).toString();
 
       <!-- Background landscape illustration -->
       <div class="w-full pointer-events-none">
-        <img
-          src="/images/prefooter-bg.png"
-          alt=""
-          class="w-full h-auto block"
-        />
+        <Image
+            src={ImageFooter}
+            layout="constrained"
+            alt="Footer illustration"
+            class="w-full h-auto block"
+          />
       </div>
 
     </section>
@@ -77,7 +81,12 @@ const ogImageUrl = new URL(ogImage.src, Astro.site).toString();
     <!-- Footer -->
     <footer class="bg-[#0c1d31] w-full py-20">
       <div class="max-width flex flex-col items-center gap-2.5">
-        <img src="/images/datum-logo.svg" alt="Datum" width="101" height="20" class="h-5 w-auto" />
+        <Image src={ImageDatumLogo}
+          alt="Datum"
+          width={101}
+          height={20}
+          class="h-5 w-auto"
+        />
         <p class="text-white opacity-40 text-xs leading-4 text-right">
           © 2025 Datum Technology Inc.
         </p>
