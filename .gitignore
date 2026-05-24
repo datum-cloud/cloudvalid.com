@@ -15,11 +15,7 @@ bun-error.log
 
 
 # environment variables
-.env
 
-.env.local
-.env.production
-.env.development
 
 # macOS-specific files
 .DS_Store
@@ -29,3 +25,4 @@ bun-error.log
 
 # ignore local claude settings
 .claude/settings.local.json
+config.bat
