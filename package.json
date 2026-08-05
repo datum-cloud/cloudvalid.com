@@ -34,7 +34,7 @@
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "eslint": "^10.0.2",
-    "eslint-plugin-astro": "^1.6.0",
+    "eslint-plugin-astro": "^3.0.0",
     "markdownlint-cli2": "^0.23.0",
     "prettier": "^3.8.1",
     "prettier-plugin-astro": "^0.14.1",
