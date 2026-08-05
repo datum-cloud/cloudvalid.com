@@ -23,7 +23,7 @@
     "@tailwindcss/vite": "^4.0.7",
     "astro": "^7.1.0",
     "astro-seo": "^1.1.0",
-    "sharp": "^0.34.2",
+    "sharp": "^0.35.3",
     "sirv": "^3.0.2",
     "tailwindcss": "^4.0.7"
   },
