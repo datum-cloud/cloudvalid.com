@@ -1,4 +1,4 @@
-FROM oven/bun:1.3-slim AS dependencies
+FROM oven/bun:1.4-slim AS dependencies
 WORKDIR /app
 COPY package.json bun.lock ./
 RUN bun install
@@ -18,7 +18,7 @@ EXPOSE 4321
 CMD ["bun", "run", "dev"]
 
 # Production stage
-FROM oven/bun:1.3-slim AS production
+FROM oven/bun:1.4-slim AS production
 WORKDIR /app
 
 COPY --from=build /app/node_modules ./node_modules
