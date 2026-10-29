@@ -1,5 +1,4 @@
 import { createServer } from "http";
-import { handler } from "./dist/server/entry.mjs";
 import sirv from "sirv";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
@@ -10,7 +9,7 @@ const __dirname = dirname(__filename);
 
 const PORT = process.env.PORT || 4321;
 const HOST = process.env.HOST || "0.0.0.0";
-const CLIENT_DIR = join(__dirname, "dist", "client");
+const CLIENT_DIR = join(__dirname, "dist");
 
 const CONTENT_TYPES = {
   ".html": "text/html; charset=utf-8",
@@ -160,6 +159,26 @@ function serveCompressed(req, res, next) {
   next();
 }
 
+// Fallback for unmatched routes: serve the pre-rendered 404 page.
+function serveNotFound(req, res) {
+  const notFoundPath = join(CLIENT_DIR, "404.html");
+  if (existsSync(notFoundPath)) {
+    const stat = statSync(notFoundPath);
+    res.writeHead(404, {
+      "Content-Type": "text/html; charset=utf-8",
+      "Content-Length": stat.size,
+    });
+    if (req.method === "HEAD") {
+      res.end();
+    } else {
+      createReadStream(notFoundPath).pipe(res);
+    }
+    return;
+  }
+  res.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
+  res.end("Not Found");
+}
+
 const server = createServer((req, res) => {
   if (process.env.NODE_ENV !== "production") {
     console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
@@ -174,10 +193,10 @@ const server = createServer((req, res) => {
     return;
   }
 
-  // Middleware order: compressed files → static files → Astro handler
+  // Middleware order: compressed files → static files → 404 page
   serveCompressed(req, res, () => {
     staticServer(req, res, () => {
-      handler(req, res);
+      serveNotFound(req, res);
     });
   });
 });
@@ -201,7 +220,7 @@ server.listen(PORT, HOST, () => {
 ║
 ║  ✅ Pre-compressed files (.gz, .br) enabled
 ║  ✅ Static file server (images, fonts, etc.) enabled
-║  ✅ Astro SSR handler enabled
+║  ✅ Static 404 page for unknown routes
 ╚════════════════════════════════════════════════════════════╝
   `);
 });
