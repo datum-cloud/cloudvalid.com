@@ -11,6 +11,7 @@ const __dirname = dirname(__filename);
 const PORT = process.env.PORT || 4321;
 const HOST = process.env.HOST || "0.0.0.0";
 const CLIENT_DIR = join(__dirname, "dist", "client");
+const SHUTDOWN_DEADLINE_MS = 25_000;
 
 const CONTENT_TYPES = {
   ".html": "text/html; charset=utf-8",
@@ -182,16 +183,28 @@ const server = createServer((req, res) => {
   });
 });
 
+server.keepAliveTimeout = 75_000;
+server.headersTimeout = 76_000;
+
 server.on("error", (err) => {
   console.error("Server error:", err);
 });
 
+let shuttingDown = false;
 process.on("SIGTERM", () => {
+  if (shuttingDown) return;
+  shuttingDown = true;
   console.log("SIGTERM received, shutting down gracefully...");
   server.close(() => {
     console.log("Server closed");
     process.exit(0);
   });
+  server.closeIdleConnections();
+  setTimeout(() => {
+    console.log("Shutdown deadline reached, closing remaining connections");
+    server.closeAllConnections();
+    process.exit(0);
+  }, SHUTDOWN_DEADLINE_MS).unref();
 });
 
 server.listen(PORT, HOST, () => {

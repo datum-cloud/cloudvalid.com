@@ -1,12 +1,12 @@
-FROM oven/bun:1.3-slim AS dependencies
+FROM node:26.12.1-alpine3.24@sha256:40cd011b55415bc894e45b02fdd5a5dfde056921b7d23a64c74f80497af48797 AS dependencies
 WORKDIR /app
-COPY package.json bun.lock ./
-RUN bun install
+COPY package.json package-lock.json ./
+RUN npm ci
 
 # Build stage
 FROM dependencies AS build
 COPY . .
-RUN bun run build
+RUN npm run build
 
 # Development stage
 FROM dependencies AS development
@@ -15,21 +15,21 @@ ENV NODE_ENV=development
 ENV HOST=0.0.0.0
 ENV PORT=4321
 EXPOSE 4321
-CMD ["bun", "run", "dev"]
+CMD ["npm", "run", "dev"]
 
 # Production stage
-FROM oven/bun:1.3-slim AS production
+FROM node:26.12.1-alpine3.24@sha256:40cd011b55415bc894e45b02fdd5a5dfde056921b7d23a64c74f80497af48797 AS production
 WORKDIR /app
-
-COPY --from=build /app/node_modules ./node_modules
-COPY --from=build /app/dist ./dist
-COPY --from=build /app/bun.lock ./
-COPY --from=build /app/package.json ./
-COPY --from=build /app/server.mjs ./server.mjs
 
 ENV NODE_ENV=production
 ENV HOST=0.0.0.0
-ENV PORT=4321   
+ENV PORT=4321
+
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev && npm cache clean --force
+
+COPY --from=build /app/dist ./dist
+COPY --from=build /app/server.mjs ./server.mjs
 
 EXPOSE 4321
-CMD ["bun", "run", "./server.mjs"]
+CMD ["node", "./server.mjs"]
