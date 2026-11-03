@@ -6,11 +6,11 @@
   "scripts": {
     "dev": "astro dev",
     "start:original": "astro dev",
-    "start": "bun run ./server.mjs",
+    "start": "node ./server.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "lint": "bun run lint:ts && bun run lint:md",
+    "lint": "npm run lint:ts && npm run lint:md",
     "lint:ts": "eslint .",
     "lint:md": "markdownlint-cli2 '**/*.md' '#node_modules'",
     "format:check": "prettier --check .",
